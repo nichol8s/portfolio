@@ -193,8 +193,8 @@ export default function Projects() {
                     {project.title}
                   </h3>
                   {project.achievement && (
-                    <span className="text-cyan-400 font-mono text-xs md:text-sm tracking-wider mt-2 md:mt-3 group-hover:translate-x-4 transition-transform duration-500 ease-out opacity-80">
-                      🏆 {project.achievement}
+                    <span className="text-cyan-400 font-space text-xs md:text-sm tracking-widest uppercase mt-2 md:mt-3 group-hover:translate-x-4 transition-transform duration-500 ease-out opacity-80">
+                      {project.achievement}
                     </span>
                   )}
                 </div>

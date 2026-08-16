@@ -216,6 +216,30 @@ export default function Contact() {
               </MagneticButton>
             </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <MagneticButton className="w-full">
+                <a 
+                  href="/resume.pdf" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between border-b border-white/20 pb-8 hover:border-cyan-400 transition-colors w-full"
+                >
+                  <div className="space-y-2 text-left min-w-0">
+                    <span className="text-white/40 font-mono text-xs tracking-widest uppercase block">Document</span>
+                    <span className="text-xl md:text-3xl font-space font-bold text-white group-hover:text-cyan-400 transition-colors truncate block">Resume</span>
+                  </div>
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-cyan-400 group-hover:border-cyan-400 group-hover:text-charcoal-900 transition-all shrink-0 ml-4">
+                    <ArrowRight size={20} className="group-hover:-rotate-45 transition-transform duration-300" />
+                  </div>
+                </a>
+              </MagneticButton>
+            </motion.div>
+
           </div>
         </motion.div>
       </div>
