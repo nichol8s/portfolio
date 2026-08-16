@@ -96,6 +96,15 @@ export default function Navbar({ show }: { show: boolean }) {
               {link.name}
             </a>
           ))}
+          <div className="w-px h-3 bg-white/20" />
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-mono font-bold tracking-[0.2em] transition-colors interactive text-cyan-400 hover:text-white drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]"
+          >
+            RESUME
+          </a>
         </nav>
 
         {/* Mobile Toggle */}
@@ -128,6 +137,14 @@ export default function Navbar({ show }: { show: boolean }) {
               {link.name}
             </a>
           ))}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-mono tracking-[0.2em] font-bold text-cyan-400 hover:text-white transition-colors py-2"
+          >
+            RESUME
+          </a>
         </nav>
       </motion.div>
     </motion.header>

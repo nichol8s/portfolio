@@ -15,6 +15,7 @@ export type ProjectData = {
   tech: string[];
   features: string[];
   githubUrl: string;
+  achievement?: string;
 };
 
 const PROJECTS: ProjectData[] = [
@@ -40,6 +41,7 @@ const PROJECTS: ProjectData[] = [
     title: "E-Learning-Engagement-Detection-System",
     repoName: "E-Learning-Engagement-Detection-System",
     category: "AI / COMPUTER VISION",
+    achievement: "Best Mini Project Award",
     shortDesc: "A multimodal system for evaluating learner engagement.",
     longDesc: "An AI-based multimodal system designed for evaluating learner engagement in digital environments. It processes multiple behavioral signals to provide an accurate assessment of user focus and interaction.",
     tech: ["Python", "TensorFlow", "Machine Learning", "MongoDB", "Flask"],
@@ -56,6 +58,7 @@ const PROJECTS: ProjectData[] = [
     title: "ECODRIVE",
     repoName: "ECODRIVE",
     category: "SUSTAINABILITY / MATLAB",
+    achievement: "Runner-Up — Srishti 2025 National Level Technical Project Exhibition & Competition",
     shortDesc: "A sustainable driving application that tracks driving behavior.",
     longDesc: "EcoDrive is designed to minimize environmental impact by optimizing driving habits. It tracks trips and provides data-driven feedback on efficiency, fuel usage, and emissions.",
     tech: ["MATLAB", "GPS Tracking"],
@@ -162,9 +165,7 @@ export default function Projects() {
             04 / Repositories
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-space text-white leading-[1.1] tracking-tight">
-            THE WORK<br />
-            BEHIND<br />
-            THE EXPERIMENTS.
+            PROJECTS
           </h2>
         </motion.div>
 
@@ -187,9 +188,16 @@ export default function Projects() {
                 <span className="text-white/20 font-space text-2xl md:text-4xl font-bold group-hover:text-cyan-400 transition-colors">
                   {project.number}
                 </span>
-                <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold font-space text-white group-hover:translate-x-4 transition-transform duration-500 ease-out">
-                  {project.title}
-                </h3>
+                <div className="flex flex-col">
+                  <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold font-space text-white group-hover:translate-x-4 transition-transform duration-500 ease-out">
+                    {project.title}
+                  </h3>
+                  {project.achievement && (
+                    <span className="text-cyan-400 font-mono text-xs md:text-sm tracking-wider mt-2 md:mt-3 group-hover:translate-x-4 transition-transform duration-500 ease-out opacity-80">
+                      🏆 {project.achievement}
+                    </span>
+                  )}
+                </div>
               </div>
               
               <div className="text-white/40 font-mono text-xs md:text-sm tracking-widest uppercase md:text-right relative z-10 group-hover:text-white transition-colors pl-12 md:pl-0">
