@@ -21,7 +21,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "ModelFlow-AI-Model-Generation-Platform-Tech-Stack",
     number: "01",
-    title: "MODELFlow",
+    title: "ModelFlow-AI-Model-Generation-Platform-Tech-Stack",
     repoName: "ModelFlow-AI-Model-Generation-Platform-Tech-Stack",
     category: "AI / MACHINE LEARNING",
     shortDesc: "A no-code/low-code AI platform architecture for generating models.",
@@ -37,7 +37,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "E-Learning-Engagement-Detection-System",
     number: "02",
-    title: "E-Learning Engagement",
+    title: "E-Learning-Engagement-Detection-System",
     repoName: "E-Learning-Engagement-Detection-System",
     category: "AI / COMPUTER VISION",
     shortDesc: "A multimodal system for evaluating learner engagement.",
@@ -69,7 +69,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "Conditioning-System",
     number: "04",
-    title: "Conditioning System",
+    title: "Conditioning-System",
     repoName: "Conditioning-System",
     category: "SYSTEMS / WEB",
     shortDesc: "A functional interface and backend architecture for environmental conditioning.",
@@ -85,7 +85,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "Blood-Bank",
     number: "05",
-    title: "Blood Bank",
+    title: "Blood-Bank",
     repoName: "Blood-Bank",
     category: "DATABASE / WEB",
     shortDesc: "A web application for managing blood donations and inventory.",
@@ -101,7 +101,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "nichol8s",
     number: "06",
-    title: "Personal Profile",
+    title: "nichol8s",
     repoName: "nichol8s",
     category: "PROFILE / ARCHITECTURE",
     shortDesc: "The personal branding and profile architecture repository.",
@@ -116,7 +116,7 @@ const PROJECTS: ProjectData[] = [
   {
     id: "Atlas-Financial-Intelligence",
     number: "07",
-    title: "Atlas",
+    title: "Atlas-Financial-Intelligence",
     repoName: "Atlas-Financial-Intelligence",
     category: "AI / FINANCE",
     shortDesc: "AI-powered financial intelligence platform.",
