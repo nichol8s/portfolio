@@ -391,8 +391,9 @@ function NeuralScene({ hoveredId, activeId, setHoveredId, setActiveId, scrollPro
   // Parallax and Scroll Camera movement
   useFrame((state) => {
     // Scroll depth effect (move through network)
-    // scrollProgress is 0 at top, 1 at bottom of hero
-    const scrollZ = scrollProgress * -15; 
+    // scrollProgress is a MotionValue (0 at top, 1 at bottom of hero)
+    const sp = scrollProgress && scrollProgress.get ? scrollProgress.get() : 0;
+    const scrollZ = sp * -15; 
     
     // Mouse Parallax (subtle 5 degrees)
     const targetRotY = (state.pointer.x * Math.PI) * 0.03;
@@ -444,7 +445,7 @@ function NeuralScene({ hoveredId, activeId, setHoveredId, setActiveId, scrollPro
   );
 }
 
-export default function NeuralNetwork3D({ scrollProgress = 0 }: { scrollProgress?: number }) {
+export default function NeuralNetwork3D({ scrollProgress }: { scrollProgress?: any }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
   
@@ -458,7 +459,7 @@ export default function NeuralNetwork3D({ scrollProgress = 0 }: { scrollProgress
     <div className="relative w-full h-screen lg:h-[900px] overflow-hidden bg-transparent">
       {/* 3D Canvas Scene */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 30], fov: 45 }} dpr={[1, 2]}>
+        <Canvas camera={{ position: [0, 0, 30], fov: 45 }} dpr={[1, 1.5]}>
           <EffectComposer>
             <Bloom luminanceThreshold={1} mipmapBlur intensity={1.5} />
           </EffectComposer>

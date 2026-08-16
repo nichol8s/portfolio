@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [hoverText, setHoverText] = useState("");
 
+  const immediateX = useMotionValue(0);
+  const immediateY = useMotionValue(0);
+  
   const cursorX = useSpring(0, { damping: 25, stiffness: 300, mass: 0.5 });
   const cursorY = useSpring(0, { damping: 25, stiffness: 300, mass: 0.5 });
 
@@ -17,7 +19,8 @@ export default function CustomCursor() {
     document.body.style.cursor = 'none';
 
     const moveCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      immediateX.set(e.clientX);
+      immediateY.set(e.clientY);
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
     };
@@ -57,7 +60,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       document.body.style.cursor = 'auto';
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, immediateX, immediateY]);
 
   // Don't render on mobile/touch devices
   if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
@@ -67,10 +70,11 @@ export default function CustomCursor() {
   return (
     <>
       {/* Small dot that follows cursor instantly */}
-      <div 
+      <motion.div 
         className="fixed top-0 left-0 w-2 h-2 bg-cyan-400 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
         style={{ 
-          transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
+          x: immediateX,
+          y: immediateY,
           opacity: isHovering ? 0 : 1
         }}
       />

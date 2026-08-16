@@ -1,24 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useScroll, useMotionValueEvent, useTransform } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
-import NeuralNetwork3D from "@/components/hero/NeuralNetwork3D";
 import MagneticButton from "@/components/interactions/MagneticButton";
+import dynamic from "next/dynamic";
+
+// Lazy load the heavy 3D WebGL scene to ensure instant initial page load
+const NeuralNetwork3D = dynamic(() => import("@/components/hero/NeuralNetwork3D"), { 
+  ssr: false, 
+  loading: () => <div className="w-full h-full min-h-[500px]" /> 
+});
 
 export default function Hero() {
   const [scrolled, setScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const { scrollY, scrollYProgress } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      setScrollProgress(Math.min(window.scrollY / window.innerHeight, 1));
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Only trigger state update when crossing the 50px threshold, preventing continuous re-renders
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const isScrolled = latest > 50;
+    if (isScrolled !== scrolled) setScrolled(isScrolled);
+  });
 
   return (
     <section 
@@ -111,7 +114,8 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
           className="w-full"
         >
-          <NeuralNetwork3D scrollProgress={scrollProgress} />
+          {/* We pass the MotionValue directly to NeuralNetwork3D to avoid React renders */}
+          <NeuralNetwork3D scrollProgress={scrollYProgress} />
         </motion.div>
       </div>
 

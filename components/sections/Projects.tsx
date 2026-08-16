@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue } from "framer-motion";
 import ProjectDetail from "@/components/projects/ProjectDetail";
 
 export type ProjectData = {
@@ -113,20 +113,38 @@ const PROJECTS: ProjectData[] = [
     ],
     githubUrl: "https://github.com/nichol8s/nichol8s",
   },
+  {
+    id: "Atlas-Financial-Intelligence",
+    number: "07",
+    title: "Atlas",
+    repoName: "Atlas-Financial-Intelligence",
+    category: "AI / FINANCE",
+    shortDesc: "AI-powered financial intelligence platform.",
+    longDesc: "Atlas is an AI-powered financial intelligence platform for market analysis, personal finance, document RAG, alerts, and conversational assistance.",
+    tech: ["Python", "JavaScript", "HTML", "CSS"],
+    features: [
+      "Market analysis",
+      "Document RAG",
+      "Conversational assistance",
+    ],
+    githubUrl: "https://github.com/nichol8s/Atlas-Financial-Intelligence",
+  },
 ];
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [hoveredProject, setHoveredProject] = useState<ProjectData | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
     <section id="projects" className="py-32 relative z-10 min-h-screen">
@@ -193,8 +211,8 @@ export default function Projects() {
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             className="fixed pointer-events-none z-50 overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-charcoal-900 hidden md:flex items-center justify-center p-6"
             style={{
-              left: mousePos.x,
-              top: mousePos.y,
+              left: mouseX,
+              top: mouseY,
               width: "320px",
               height: "200px",
               x: "-50%",

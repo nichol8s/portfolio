@@ -16,30 +16,28 @@ export default function ScrollProgress() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Find the current section
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      let current = SECTIONS[0].id;
-      
-      for (const section of SECTIONS) {
-        const el = document.getElementById(section.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          // If the top of the section is above the middle of the screen
-          if (rect.top <= windowHeight / 2) {
-            current = section.id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        }
+        });
+      },
+      { 
+        // Trigger when a section takes up at least 30% of the viewport 
+        // or crosses the middle of the screen
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0 
       }
-      
-      setActiveSection(current);
-    };
+    );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Init
-    return () => window.removeEventListener("scroll", handleScroll);
+    SECTIONS.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
